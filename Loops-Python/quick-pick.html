@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🎰 Quick Pick Lottery</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; background: #222; color: #fff; }
+    .container { max-width: 400px; margin: 50px auto; background: #333; padding: 20px; border-radius: 10px; }
+    select, input, button { width: 100%; padding: 10px; margin: 10px 0; border-radius: 6px; border: none; }
+    button { background: gold; color: black; font-weight: bold; cursor: pointer; }
+    button:hover { background: #ffe066; }
+    .results { margin-top: 20px; }
+    .ticket { background: #444; border: 1px dashed gold; padding: 10px; margin: 5px 0; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎟️ Quick Pick Lottery</h1>
+
+    <label>Select the type of quick pick:</label>
+    <select id="selection">
+      <option value="3">Quick Pick Three</option>
+      <option value="4">Quick Pick Four</option>
+      <option value="6">Quick Pick Six</option>
+    </select>
+
+    <label>How many quick picks?</label>
+    <input type="number" id="howMany" min="1" value="1">
+
+    <button onclick="generate()">Get My Numbers!</button>
+
+    <div class="results" id="results"></div>
+  </div>
+
+  <script>
+    function generate() {
+      const selection = parseInt(document.getElementById('selection').value);
+      const howMany = parseInt(document.getElementById('howMany').value);
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = '';
+
+      let top = selection === 6 ? 46 : 9;
+
+      for (let i = 0; i < howMany; i++) {
+        const picks = [];
+        while (picks.length < selection) {
+          const num = Math.floor(Math.random() * top) + 1;
+          if (!picks.includes(num)) picks.push(num);
+        }
+        resultsDiv.innerHTML += `<div class="ticket">${picks.join(' ')}</div>`;
+      }
+    }
+  </script>
+</body>
+</html>
