@@ -3,9 +3,9 @@
 import random
 
 selection = 0
-exit = False
 
-while not exit:
+
+while True:
     print("Select the type of quick pick")
     print("1. Quick Pick Three")
     print("2. Quick Pick Four")
@@ -24,23 +24,30 @@ while not exit:
         exit = True
     else:
         print("Dummy, thats not a choice, try again")
-        print()
+        print("Pay attention this time\n")
+        continue
        
-if selection == 6:
-  top = 99
-else:
-  top = 9
+    if selection == 6:
+      top = 46
+    else:
+      top = 9
   
-how_many = int(input("How many quick picks do you want? "))
-print()
+    how_many = int(input("How many quick picks do you want? "))
+    print()
 
 # get a random # between 1 - 99 (top) and get x amount of numbers (selection)
-print("Here are your numbers. Good Luck !")
-print()
+    print("Here are your numbers. Good Luck !")
+    print()
 
-for _ in range(how_many):
-    picks = random.sample(range(1, top), selection)  
-    print(*picks, sep=' ')
-   
-print()
-print("Goodbye... play again soon")
+    for _ in range(how_many):
+        picks = random.sample(range(1, top + 1 ), selection)  
+        print(*picks, sep=' ')
+    
+
+    print()
+
+    again = input("Would you like to pick again? (y/n): ").strip().lower()
+    
+    if again != 'y':
+        print("Goodbye... play again soon!")
+        break
